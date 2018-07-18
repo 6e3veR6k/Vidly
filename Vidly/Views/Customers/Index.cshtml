@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Vidly.Models.Customer>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+	<div class="my-3 p-3 bg-white rounded box-shadow">
+		<h4 class="border-bottom border-gray pb-2 mb-0">Customers</h4>
+		@foreach (var customer in Model)
+		{
+		<div class="media text-muted pt-3">
+			<img class="mr-2 rounded-circle" src=@customer.ImgPath alt="" width="60" height="60" />
+			<div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+				<div class="d-flex justify-content-between w-100">
+					<strong class="d-block text-gray-dark">@customer.FirstName</strong>
+					<strong class="text-gray-dark">@customer.RegisteredDate.ToShortDateString()</strong>
+				</div>
+				<span class="d-block">@customer.SecondName @customer.MiddleName</span>
+				<span class="d-block"><small>@customer.BirthDate.ToLongDateString()</small></span>
+			</div>
+		</div>
+		}
+	</div>
+</div>

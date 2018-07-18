@@ -1,0 +1,25 @@
+﻿@model Vidly.Models.Movie
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+	<div class="card flex-md-row mb-4 box-shadow h-md-250">
+		<div class="card-body d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">@Model.Genre</strong>
+			<h3 class="mb-0">
+				@Model.OriginalTitle
+			</h3>
+			<div class="mb-1 text-muted">@Model.ReleaseDate.ToShortDateString() <small><span class="badge badge-pill badge-dark">@Model.Rating</span></small></div>
+			<p class="card-text text-left movie-description">@Model.Description</p>
+			<small>Director: @Model.Director</small>
+		</div>
+		<img class="card-img-right flex-auto d-none d-lg-block" src=@Model.ImgPath alt="Card image cap">
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

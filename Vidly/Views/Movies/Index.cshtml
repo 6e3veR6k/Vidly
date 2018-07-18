@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Available movies</h4>
+
+@if (Model.Count() != 0)
+{
+<div class="row card-deck">
+	@foreach (var movie in Model)
+	{
+		<div class="card">
+			<img class="card-img-top" src="@movie.ImgPath" alt="@movie.OriginalTitle" height="360">
+			<div class="card-body align-content-between">
+				<h5 class="card-title d-block">
+					@Html.ActionLink(movie.OriginalTitle, "Details", "Movies", new { @id = movie.Id }, null)
+				</h5>
+				<div class="d-block">
+					<span class="badge badge-pill badge-dark">
+						<smal>@movie.Rating</smal>
+					</span>
+					&ensp;|&ensp;
+					<span>
+						<small>@movie.ReleaseDate.ToShortDateString()</small>
+					</span>
+				</div>
+				<p class="movie-description">@movie.Description</p>
+			</div>
+			<div class="card-footer">
+				@Html.ActionLink("Show more", "Details", "Movies", new { @id = movie.Id }, new { @class = "btn btn-primary" })
+			</div>
+		</div>
+	}
+</div>
+}
+else
+{
+	<p> There is not movies in the database.</p>
+}
+
+
