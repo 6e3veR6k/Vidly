@@ -1,0 +1,26 @@
+﻿@model Vidly.Models.Customer
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+	<div class="card flex-md-row mb-4 box-shadow h-md-250">
+		<div class="card-body d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">@Model.Id</strong>
+			<h3 class="mb-0">
+				@Model.FirstName @Model.SecondName[0] . @Model.MiddleName[0] .
+			</h3>
+			<div class="mb-1 text-muted">@Model.RegisteredDate.ToShortDateString() <small><span class="badge badge-pill badge-dark">@Model.BirthDate.ToShortDateString()</span></small></div>
+			<p class="card-text text-left movie-description">@Model.Email</p>
+			<small>Subscribed: @Model.IsSubscribedToNewsletter.ToString()</small>
+		</div>
+		<img class="card-img-right flex-auto d-none d-lg-block" src=@Model.ImgPath alt="Card image cap">
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

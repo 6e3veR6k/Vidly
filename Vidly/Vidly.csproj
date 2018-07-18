@@ -167,8 +167,25 @@
     <Compile Include="Migrations\201807181643165_FirstInit.Designer.cs">
       <DependentUpon>201807181643165_FirstInit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807181649262_ChangeCustomerModel.cs" />
+    <Compile Include="Migrations\201807181649262_ChangeCustomerModel.Designer.cs">
+      <DependentUpon>201807181649262_ChangeCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807181654590_CreateMembershipClass.cs" />
+    <Compile Include="Migrations\201807181654590_CreateMembershipClass.Designer.cs">
+      <DependentUpon>201807181654590_CreateMembershipClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807181656483_PopulateMembershipTypes.cs" />
+    <Compile Include="Migrations\201807181656483_PopulateMembershipTypes.Designer.cs">
+      <DependentUpon>201807181656483_PopulateMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807181708065_ApplyAnnotationForCustomerModel.cs" />
+    <Compile Include="Migrations\201807181708065_ApplyAnnotationForCustomerModel.Designer.cs">
+      <DependentUpon>201807181708065_ApplyAnnotationForCustomerModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\NewRentalDto.cs" />
     <Compile Include="Models\VidlyDbContext.cs" />
@@ -269,6 +286,7 @@
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,6 +305,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807181643165_FirstInit.resx">
       <DependentUpon>201807181643165_FirstInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181649262_ChangeCustomerModel.resx">
+      <DependentUpon>201807181649262_ChangeCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181654590_CreateMembershipClass.resx">
+      <DependentUpon>201807181654590_CreateMembershipClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181656483_PopulateMembershipTypes.resx">
+      <DependentUpon>201807181656483_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181708065_ApplyAnnotationForCustomerModel.resx">
+      <DependentUpon>201807181708065_ApplyAnnotationForCustomerModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
