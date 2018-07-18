@@ -22,6 +22,7 @@ namespace Vidly.Controllers
             return View(Movies);
         }
 
+        [Route("movies/details/{id:regex(\\d{1}):range(1,4)}")]
         public ActionResult Details(int id)
         {
             var movie = Movies.FirstOrDefault(x => x.Id == id);
