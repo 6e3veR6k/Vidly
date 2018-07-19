@@ -19,7 +19,7 @@ namespace Vidly.Controllers
         //    new Customer {Id=5, ImgPath="/Content/Images/Square_JD.png",  FirstName="Marcel", SecondName="Matylda", MiddleName="Krusen", RegisteredDate=new DateTime(2001, 4, 18), Email="krusen@gmail.com", BirthDate=new DateTime(1984, 10, 22)},
         //};
 
-        private VidlyDbContext _context;
+        private readonly VidlyDbContext _context;
 
         public CustomersController()
         {

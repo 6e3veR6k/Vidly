@@ -201,8 +201,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\diehard.jpg" />
+    <Content Include="Content\Images\elam_portrait.jpg" />
     <Content Include="Content\Images\frozen.jpg" />
     <Content Include="Content\Images\Heckman-Darrell-square-e1503328318323.jpg" />
+    <Content Include="Content\Images\hesiodos_portrait.jpg" />
+    <Content Include="Content\Images\lilia_portrait.jpg" />
+    <Content Include="Content\Images\terserta_portrait.jpg" />
     <Content Include="Content\Images\WEB_square.jpg" />
     <Content Include="Content\Images\nT1A9bf6pnHlCYi.jpg" />
     <Content Include="Content\Images\redemption.jpg" />
