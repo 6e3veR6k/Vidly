@@ -203,12 +203,29 @@
     <Compile Include="Migrations\201807192106523_PopulateMoviesModel.Designer.cs">
       <DependentUpon>201807192106523_PopulateMoviesModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807201422136_PopulatingGenres.cs" />
+    <Compile Include="Migrations\201807201422136_PopulatingGenres.Designer.cs">
+      <DependentUpon>201807201422136_PopulatingGenres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201509463_CreateModelRating.cs" />
+    <Compile Include="Migrations\201807201509463_CreateModelRating.Designer.cs">
+      <DependentUpon>201807201509463_CreateModelRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201521070_ChangeRatingModel.cs" />
+    <Compile Include="Migrations\201807201521070_ChangeRatingModel.Designer.cs">
+      <DependentUpon>201807201521070_ChangeRatingModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201542000_PopulateRatings.cs" />
+    <Compile Include="Migrations\201807201542000_PopulateRatings.Designer.cs">
+      <DependentUpon>201807201542000_PopulateRatings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\NewRentalDto.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\VidlyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
@@ -221,11 +238,14 @@
     <Content Include="Content\bootstrap-yeti.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\avangersinfinitywar.jpg" />
     <Content Include="Content\Images\diehard.jpg" />
     <Content Include="Content\Images\elam_portrait.jpg" />
     <Content Include="Content\Images\frozen.jpg" />
     <Content Include="Content\Images\Heckman-Darrell-square-e1503328318323.jpg" />
     <Content Include="Content\Images\hesiodos_portrait.jpg" />
+    <Content Include="Content\Images\inception.jpg" />
+    <Content Include="Content\Images\lifeisbeautiful.jpg" />
     <Content Include="Content\Images\lilia_portrait.jpg" />
     <Content Include="Content\Images\terserta_portrait.jpg" />
     <Content Include="Content\Images\WEB_square.jpg" />
@@ -357,6 +377,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807192106523_PopulateMoviesModel.resx">
       <DependentUpon>201807192106523_PopulateMoviesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201422136_PopulatingGenres.resx">
+      <DependentUpon>201807201422136_PopulatingGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201509463_CreateModelRating.resx">
+      <DependentUpon>201807201509463_CreateModelRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201521070_ChangeRatingModel.resx">
+      <DependentUpon>201807201521070_ChangeRatingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201542000_PopulateRatings.resx">
+      <DependentUpon>201807201542000_PopulateRatings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

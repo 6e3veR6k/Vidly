@@ -6,16 +6,26 @@ using System.Web;
 
 namespace Vidly.Models
 {
-    public class Genre
+    public class Rating
     {
         public byte Id { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(5)]
+        public string Symbol { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string Type { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Level { get; set; }
+
         public string Description { get; set; }
+
         public virtual ICollection<Movie> Movies { get; set; }
 
-        public Genre()
+        public Rating()
         {
             Movies = new List<Movie>();
         }

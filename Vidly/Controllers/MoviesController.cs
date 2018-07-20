@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -36,10 +37,13 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
-        [Route("movies/details/{id:regex(\\d{1}):range(1,4)}")]
         public ActionResult Details(int id)
         {
-            var movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            var movie = _context.Movies.Include(m => m.Genres).FirstOrDefault(x => x.Id == id);
+            if (movie == null)
+                return HttpNotFound();
+
+
             return View(movie);
         }
     }

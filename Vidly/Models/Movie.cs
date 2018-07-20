@@ -13,8 +13,10 @@ namespace Vidly.Models
         public DateTime ReleaseDate { get; set; }
         public string Director { get; set; }
         public string Description { get; set; }
-        public string Rating { get; set; }
-        public ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
+
+        public byte RatingId { get; set; }
+        public virtual Rating Rating { get; set; }
 
         public Movie()
         {
