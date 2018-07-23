@@ -15,7 +15,7 @@
 			<div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
 				<div class="d-flex justify-content-between w-100">
 					<strong class="d-block text-success">
-						@Html.ActionLink(customer.FirstName, "Details", "Customers", new {id = customer.Id}, null)
+						@Html.ActionLink(customer.FirstName, "Edit", "Customers", new {id = customer.Id}, null)
 					</strong>
 					<strong class="text-info">Registered: @customer.RegisteredDate.ToShortDateString()</strong>
 				</div>

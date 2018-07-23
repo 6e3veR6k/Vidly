@@ -1,0 +1,36 @@
+﻿@model Vidly.ViewModels.CustomerFromViewModel
+@{
+	ViewBag.Title = "title";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="row flex-column align-items-center">*@
+<div class="card box-shadow col-lg-4 m-lg-auto">
+@*<h4 class="d-flex col-lg-3 justify-content-center">New customer</h4>*@
+
+@using (Html.BeginForm("Save", "Customers", FormMethod.Post, new { @class = "card-body" }))
+{
+	<h4 class="card-title">New customer</h4>
+	<div class="form-group">
+		@Html.LabelFor(c => c.Customer.FirstName)
+		@Html.TextBoxFor(c => c.Customer.FirstName, new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(c => c.Customer.BirthDate)
+		@Html.TextBoxFor(c => c.Customer.BirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(c => c.Customer.Email)
+		@Html.TextBoxFor(c => c.Customer.Email, new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select membership type", new { @class = "form-control form-control-sm" })
+	</div>
+	<div class="form-group form-check">
+		@Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsletter, new { @class = "form-check-input" })
+		@Html.LabelFor(c => c.Customer.IsSubscribedToNewsletter)
+	</div>
+	@Html.HiddenFor(c => c.Customer.Id)
+	<button type="submit" class="btn btn-primary">Submit</button>
+}
+</div>

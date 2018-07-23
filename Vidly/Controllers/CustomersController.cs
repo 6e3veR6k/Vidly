@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -48,6 +50,56 @@ namespace Vidly.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes;
+            var modelView = new CustomerFromViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View("CustomerForm", modelView);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var existingCustomer = _context.Customers.Single(c => c.Id == customer.Id);
+                //TryUpdateModel(existingCustomer);
+
+                existingCustomer.FirstName = customer.FirstName;
+                existingCustomer.BirthDate = customer.BirthDate;
+                existingCustomer.Email = customer.Email;
+                existingCustomer.MembershipType = customer.MembershipType;
+                existingCustomer.MembershipTypeId = customer.MembershipTypeId;
+                existingCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customers");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFromViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
         }
     }
 }
