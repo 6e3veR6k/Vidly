@@ -219,11 +219,16 @@
     <Compile Include="Migrations\201807201542000_PopulateRatings.Designer.cs">
       <DependentUpon>201807201542000_PopulateRatings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807240706262_CreateNewPropertyMovieModel.cs" />
+    <Compile Include="Migrations\201807240706262_CreateNewPropertyMovieModel.Designer.cs">
+      <DependentUpon>201807240706262_CreateNewPropertyMovieModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Models\NewRentalDto.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\VidlyDbContext.cs" />
@@ -334,6 +339,8 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
+    <Content Include="Views\Customers\Custom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -391,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807201542000_PopulateRatings.resx">
       <DependentUpon>201807201542000_PopulateRatings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807240706262_CreateNewPropertyMovieModel.resx">
+      <DependentUpon>201807240706262_CreateNewPropertyMovieModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

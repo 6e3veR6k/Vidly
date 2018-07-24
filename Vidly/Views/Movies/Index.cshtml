@@ -4,38 +4,34 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Available movies</h4>
+<h4 class="mb-4">Available movies</h4>
+@Html.ActionLink("New", "NewMovie", "Movies", null, new { @class = "btn btn-secondary mb-5"})
 
 @if (Model.Count() != 0)
 {
-<div class="row">
-	@foreach (var movie in Model)
-	{
-		<div class="col-3">
-			<div class="card">
-				<img class="card-img-top" src="@movie.ImgPath" alt="@movie.OriginalTitle" height="360">
-				<div class="card-body align-content-between">
-					<h5 class="card-title d-block">
-						@Html.ActionLink(movie.OriginalTitle, "Details", "Movies", new { @id = movie.Id }, null)
-					</h5>
-					<div class="d-block">
-						<span class="badge badge-pill badge-dark">
-							<smal>@movie.Rating.Symbol</smal>
-						</span>
-						&ensp;|&ensp;
-						<span>
-							<small>@movie.ReleaseDate.ToShortDateString()</small>
-						</span>
+	<div class="row">
+		@foreach (var movie in Model)
+		{
+			<div class="col-md-6">
+				<div class="card flex-md-row mb-4 box-shadow h-md-250">
+					<div class="card-body d-flex flex-column align-items-start">
+						<h5 class="card-title mb-0">
+							@Html.ActionLink(movie.OriginalTitle, "Details", "Movies", new { @id = movie.Id }, new { @class = "text-dark" })
+						</h5>
+						<div class="mb-1 text-muted">
+							<small>Release: @movie.ReleaseDate.ToShortDateString()</small>
+						</div>
+						<p class="card-text d-block m-auto"><small>@movie.Description</small></p>
+
+						@Html.ActionLink("Show more", "Details", "Movies", new { @id = movie.Id }, null)
 					</div>
-					<p class="movie-description">@movie.Description</p>
-				</div>
-				<div class="card-footer">
-					@Html.ActionLink("Show more", "Details", "Movies", new { @id = movie.Id }, new { @class = "btn btn-primary" })
+					<div class="card-img-right flex-auto d-none d-md-block" style="height: 248px; width: 150px;">
+						<img src="@movie.ImgPath" alt="@movie.OriginalTitle" style="height: 248px; width: 150px; object-fit: cover">
+					</div>
 				</div>
 			</div>
-		</div>
-	}
-</div>
+		}
+	</div>
 }
 else
 {
