@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -49,7 +50,17 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var selectedMovie = _context.Movies.Include(m => m.Genres).Include(m => m.Rating).Single(m => m.Id == id);
+            var genres = _context.Genres.ToList();
+            var ratings = _context.Ratings.ToList();
+
+            var movieForm = new MovieFormViewModel
+            {
+                Movie = selectedMovie,
+                Genres = genres,
+                Ratings = ratings
+            };
+            return View("MovieForm", movieForm);
         }
 
         public ActionResult NewMovie()
@@ -78,11 +89,12 @@ namespace Vidly.Controllers
             }
             else
             {
-                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                var movieInDb = _context.Movies.Include(m => m.Genres).Include(m => m.Rating).Single(m => m.Id == movie.Id);
 
                 movieInDb.ImgPath = movie.ImgPath;
                 movieInDb.OriginalTitle = movie.OriginalTitle;
-                movieInDb.Rating = movie.Rating;
+                //movieInDb.Rating = movie.Rating;
+                movieInDb.RatingId = movie.RatingId;
                 movieInDb.Genres = movie.Genres;
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
@@ -90,7 +102,15 @@ namespace Vidly.Controllers
                 movieInDb.Description = movie.Description;
             }
 
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e);
+            }
+            
 
             return RedirectToAction("Index", "Movies");
         }
