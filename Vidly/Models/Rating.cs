@@ -23,7 +23,7 @@ namespace Vidly.Models
 
         public string Description { get; set; }
 
-        public virtual ICollection<Movie> Movies { get; set; }
+        public ICollection<Movie> Movies { get; set; }
 
         public Rating()
         {

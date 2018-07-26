@@ -10,7 +10,7 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
         public string ImgPath { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter customer's name.")]
         [StringLength(255)]
         [Display(Name = "Customer name")]
         public string FirstName { get; set; }
@@ -20,6 +20,9 @@ namespace Vidly.Models
         [StringLength(255)]
         public string Email { get; set; }
         public DateTime RegisteredDate { get; set; }
+
+        [Display(Name = "Date of birth")]
+        [Min18YearsIfMember]
         public DateTime? BirthDate { get; set; }
 
         [Display(Name = "Subscriber")]

@@ -16,9 +16,11 @@ namespace Vidly.Models
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Title")]
         public string OriginalTitle { get; set; }
 
         [Required]
+        [Display(Name = "Release")]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
@@ -29,9 +31,11 @@ namespace Vidly.Models
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Count")]
         public int NumberInStock { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        [Required]
+        public ICollection<Genre> Genres { get; set; }
 
         public byte RatingId { get; set; }
         public Rating Rating { get; set; }

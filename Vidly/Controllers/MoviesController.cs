@@ -51,55 +51,79 @@ namespace Vidly.Controllers
         public ActionResult Edit(int id)
         {
             var selectedMovie = _context.Movies.Include(m => m.Genres).Include(m => m.Rating).Single(m => m.Id == id);
-            var genres = _context.Genres.ToList();
-            var ratings = _context.Ratings.ToList();
 
-            var movieForm = new MovieFormViewModel
+
+            var movieForm = new MovieFormViewModel(selectedMovie)
             {
-                Movie = selectedMovie,
-                Genres = genres,
-                Ratings = ratings
+                GenresInDb = _context.Genres.ToList(),
+                RatingsInDb = _context.Ratings.ToList()
             };
             return View("MovieForm", movieForm);
         }
 
         public ActionResult NewMovie()
         {
-            var genres = _context.Genres.ToList();
-            var ratings = _context.Ratings.ToList();
+
             var movieForm = new MovieFormViewModel
             {
-                Genres = genres,
-                Ratings = ratings
+                GenresInDb = _context.Genres.ToList(),
+                RatingsInDb = _context.Ratings.ToList()
             };
 
             return View("MovieForm", movieForm);
         }
 
         [HttpPost]
-        public ActionResult Save(MovieFormViewModel movieView)
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(MovieFormViewModel movieForm)
         {
-            var movie = movieView.Movie;
-
-            movie.Genres = _context.Genres.Join(movieView.SelectedMovieGenres, g => g.Id, x => x, (g, x) => g).ToList();
-
-            if(movie.Id == 0)
+            if(!ModelState.IsValid)
             {
+                var viewModel = new MovieFormViewModel()
+                {
+                    ImgPath = movieForm.ImgPath,
+                    OriginalTitle = movieForm.OriginalTitle,
+                    ReleaseDate = movieForm.ReleaseDate,
+                    Director = movieForm.Director,
+                    Description = movieForm.Description,
+                    GenreIds = movieForm.GenreIds,
+                    RatingId = movieForm.RatingId,
+                    GenresInDb = _context.Genres.ToList(),
+                    RatingsInDb = _context.Ratings.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
+
+            var selectedGenres = _context.Genres.Join(movieForm.GenreIds, g => g.Id, x => x, (g, x) => g).ToList();
+
+            if(movieForm.Id == 0)
+            {
+                var movie = new Movie
+                {
+                    ImgPath = movieForm.ImgPath,
+                    OriginalTitle = movieForm.OriginalTitle,
+                    RatingId = movieForm.RatingId.Value,
+                    Genres = selectedGenres,
+                    NumberInStock = movieForm.NumberInStock,
+                    ReleaseDate = movieForm.ReleaseDate.Value,
+                    Director = movieForm.Director,
+                    Description = movieForm.Description,
+                };
                 _context.Movies.Add(movie);
             }
             else
             {
-                var movieInDb = _context.Movies.Include(m => m.Genres).Include(m => m.Rating).Single(m => m.Id == movie.Id);
+                var movieInDb = _context.Movies.Include(m => m.Genres).Include(m => m.Rating).Single(m => m.Id == movieForm.Id);
 
-                movieInDb.ImgPath = movie.ImgPath;
-                movieInDb.OriginalTitle = movie.OriginalTitle;
+                movieInDb.ImgPath = movieForm.ImgPath;
+                movieInDb.OriginalTitle = movieForm.OriginalTitle;
                 //movieInDb.Rating = movie.Rating;
-                movieInDb.RatingId = movie.RatingId;
-                movieInDb.Genres = movie.Genres;
-                movieInDb.NumberInStock = movie.NumberInStock;
-                movieInDb.ReleaseDate = movie.ReleaseDate;
-                movieInDb.Director = movie.Director;
-                movieInDb.Description = movie.Description;
+                movieInDb.RatingId = movieForm.RatingId.Value;
+                movieInDb.Genres = selectedGenres;
+                movieInDb.NumberInStock = movieForm.NumberInStock;
+                movieInDb.ReleaseDate = movieForm.ReleaseDate.Value;
+                movieInDb.Director = movieForm.Director;
+                movieInDb.Description = movieForm.Description;
             }
 
             try

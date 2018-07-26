@@ -12,50 +12,60 @@
 		@using (Html.BeginForm("Save", "Movies"))
 		{
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.OriginalTitle, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.TextBoxFor(m => m.Movie.OriginalTitle, new { @class = "form-group col-sm-9 p-1" })
+				@Html.LabelFor(m => m.OriginalTitle, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.TextBoxFor(m => m.OriginalTitle, new { @class = "form-group col-sm-9 p-1" })
+				<small>@Html.ValidationMessageFor(m => m.OriginalTitle)</small>
 			</div>
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.ImgPath, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.TextBoxFor(m => m.Movie.ImgPath, new { @class = "form-group col-sm-9 p-1" })
+				@Html.LabelFor(m => m.ImgPath, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.TextBoxFor(m => m.ImgPath, new { @class = "form-group col-sm-9 p-1" })
+				<small>@Html.ValidationMessageFor(m => m.ImgPath)</small>
 			</div>
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.ReleaseDate, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:dd.MM.yyyy}", new { @class = "form-group col-sm-9 p-1" })
+				@Html.LabelFor(m => m.ReleaseDate, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.TextBoxFor(m => m.ReleaseDate, "{0:dd.MM.yyyy}", new { @class = "form-group col-sm-9 p-1" })
+				<small>@Html.ValidationMessageFor(m => m.ReleaseDate)</small>
 			</div>
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.Director, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.TextBoxFor(m => m.Movie.Director, new { @class = "form-group col-sm-9 p-1" })
+				@Html.LabelFor(m => m.Director, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.TextBoxFor(m => m.Director, new { @class = "form-group col-sm-9 p-1" })
+				<small>@Html.ValidationMessageFor(m => m.Director)</small>
 			</div>
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.Description, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.TextAreaFor(m => m.Movie.Description, new { @class = "form-group col-sm-9 p-1" })
+				@Html.LabelFor(m => m.Description, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.TextAreaFor(m => m.Description, new { @class = "form-group col-sm-9 p-1" })
+				<small>@Html.ValidationMessageFor(m => m.Description)</small>
 			</div>
 			<div class="form-group m-1 row">
-				@Html.LabelFor(m => m.Movie.NumberInStock, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
-				@Html.EditorFor(m => m.Movie.NumberInStock, new { @class = "form-group col-sm-9 p-2" })
+				@Html.LabelFor(m => m.NumberInStock, new { @class = "col-sm-3 text-muted text-left p-0 pt-1" })
+				@Html.EditorFor(m => m.NumberInStock, new { @class = "form-group col-sm-9 p-2" })
+				<small>@Html.ValidationMessageFor(m => m.NumberInStock)</small>
 			</div>
 			<div class="form-group m-1 row mb-4 mt-4">
-				@if(Model.Movie == null)
+				@if (Model.Id == 0)
 				{
-					@Html.DropDownListFor(m => m.SelectedMovieGenres, new MultiSelectList(Model.Genres, "Id", "Type"), new { @class = "form-control form-control-sm", multiple = "multiple" });
+					@Html.DropDownListFor(m => m.GenreIds, new MultiSelectList(Model.GenresInDb, "Id", "Type"), new { @class = "form-control form-control-sm", multiple = "multiple" });
 				}
 				else
 				{
-					@Html.DropDownListFor(m => m.SelectedMovieGenres, new MultiSelectList(Model.Genres, "Id", "Type", Model.Movie.Genres.Select(m => m.Id)), new { @class = "form-control form-control-sm", multiple = "multiple" });
+					@Html.DropDownListFor(m => m.GenreIds, new MultiSelectList(Model.GenresInDb, "Id", "Type", Model.GenreIds), new { @class = "form-control form-control-sm", multiple = "multiple" });
 				}
-
-				</div>
-			<div class="form-group m-1 row mb-4">
-				@Html.DropDownListFor(m => m.Movie.RatingId, new SelectList(Model.Ratings, "Id", "Symbol"), "Rating", new { @class = "form-control form-control-sm" })
+				<small>@Html.ValidationMessageFor(m => m.GenreIds)</small>
 			</div>
-			@Html.HiddenFor(m => m.Movie.Id)
+			<div class="form-group m-1 row mb-4">
+				@Html.DropDownListFor(m => m.RatingId, new SelectList(Model.RatingsInDb, "Id", "Symbol"), "Rating", new { @class = "form-control form-control-sm" })
+				<small>@Html.ValidationMessageFor(m => m.RatingId)</small>
+			</div>
+			@Html.HiddenFor(m => m.Id)
+			@Html.AntiForgeryToken()
 			<button type="submit" class="btn btn-outline-success btn-sm" style="width: 200px;">Save</button>
 		}
 	</div>
 </div>
 
-
+@section scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
 
 
 

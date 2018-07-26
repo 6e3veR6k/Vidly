@@ -13,7 +13,7 @@ namespace Vidly.Models
         [StringLength(100)]
         public string Type { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Movie> Movies { get; set; }
+        public ICollection<Movie> Movies { get; set; }
 
         public Genre()
         {

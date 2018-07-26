@@ -14,14 +14,17 @@
 	<div class="form-group">
 		@Html.LabelFor(c => c.Customer.FirstName)
 		@Html.TextBoxFor(c => c.Customer.FirstName, new { @class = "form-control" })
+		<small>@Html.ValidationMessageFor(c => c.Customer.FirstName)</small>
 	</div>
 	<div class="form-group">
 		@Html.LabelFor(c => c.Customer.BirthDate)
 		@Html.TextBoxFor(c => c.Customer.BirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+		<small>@Html.ValidationMessageFor(c => c.Customer.BirthDate)</small>
 	</div>
 	<div class="form-group">
 		@Html.LabelFor(c => c.Customer.Email)
 		@Html.TextBoxFor(c => c.Customer.Email, new { @class = "form-control" })
+		<small>@Html.ValidationMessageFor(c => c.Customer.Email)</small>
 	</div>
 	<div class="form-group">
 		@Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select membership type", new { @class = "form-control form-control-sm" })
@@ -31,6 +34,13 @@
 		@Html.LabelFor(c => c.Customer.IsSubscribedToNewsletter)
 	</div>
 	@Html.HiddenFor(c => c.Customer.Id)
+	@Html.AntiForgeryToken()
 	<button type="submit" class="btn btn-primary">Submit</button>
 }
 </div>
+
+
+@section scripts 
+	{
+		@Scripts.Render("~/bundles/jqueryval")
+	}
